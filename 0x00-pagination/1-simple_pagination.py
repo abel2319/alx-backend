@@ -42,7 +42,4 @@ class Server:
         if indexes[0] >= len(data):
             return []
 
-        if indexes[1] >= len(data) and indexes[0] < len(data):
-            return data[indexes[0]: indexes[0] + indexes[1] - len(data)]
-
-        return data[indexes[0]: indexes[1] - len(data)]
+        return data[indexes[0]: min(indexes[1], len(data))]
