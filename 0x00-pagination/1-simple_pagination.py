@@ -1,6 +1,8 @@
 import csv
 import math
 from typing import List
+"""Simple pagination
+"""
 
 
 def index_range(page: int, page_size: int) -> tuple:
@@ -37,10 +39,10 @@ class Server:
         indexes = index_range(page, page_size)
         data = self.dataset()
 
-        if indexes[0] > len(data):
+        if indexes[0] >= len(data):
             return []
 
-        if indexes[1] > len(data) and indexes[0] < len(data):
-            return data[indexes[0]: indexes[1] - len(data)]
+        if indexes[1] >= len(data) and indexes[0] < len(data):
+            return data[indexes[0]: indexes[0] + indexes[1] - len(data)]
 
         return data[indexes[0]: indexes[1] - len(data)]
