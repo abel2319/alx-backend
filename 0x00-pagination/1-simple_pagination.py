@@ -1,8 +1,9 @@
+#!/usr/bin/env python3
+"""Simple pagination
+"""
 import csv
 import math
 from typing import List
-"""Simple pagination
-"""
 
 
 def index_range(page: int, page_size: int) -> tuple:
@@ -33,15 +34,13 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """get data for page
         """
-        assert type(page) is int and page > 0
-        assert type(page_size) is int and page_size > 0
+        assert type(page) == int and type(page_size) == int
+        assert page > 0 and page_size > 0
 
-        # get the data from the csv
+        indexes = index_range(page, page_size)
         data = self.dataset()
 
-        try:
-            # get the index to start and end at
-            start, end = index_range(page, page_size)
-            return data[start:end]
-        except IndexError:
+        if indexes[0] >= len(data):
             return []
+
+        return data[indexes[0]: min(indexes[1], len(data))]
