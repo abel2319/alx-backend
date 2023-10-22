@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/tsr/bin/env python3
 """Simple pagination
 """
 import csv
@@ -47,14 +47,15 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """get data for page
-        """ 
+        """
         indexes = index_range(page, page_size)
         data = self.get_page(page, page_size)
+        lenght = len(self.dataset())
         return {
                 'page_size': len(data),
                 'page': page,
                 'data': data,
-                'next_page': page + 1 if indexes[1] < len(self.dataset()) else None,
+                'next_page': page + 1 if indexes[1] < lenght else None,
                 'prev_page': page - 1 if indexes[0] > 0 else None,
                 'total_pages': math.ceil(len(self.dataset()) / page_size)
                 }
