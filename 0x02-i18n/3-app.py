@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""0. Basic Flask app
+"""3. Parametrize templates
 """
 from flask import Flask
 from flask import render_template
