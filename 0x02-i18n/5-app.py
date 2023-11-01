@@ -65,7 +65,7 @@ def before_request() -> None:
 def hello_world() -> str:
     """Hello Holberton
     """
-    return render_template('3-index.html')
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
