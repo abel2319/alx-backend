@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """5. Mock logging in
 """
-from flask import Flask
+from flask import Flask, g
 from flask import render_template
 from flask import request
 from flask_babel import Babel
-from typing import Dict
+from typing import Dict, Union
 
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ babel = Babel(app)
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
-    2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
+    2: {"name": "Beygit once", "locale": "en", "timezone": "US/Central"},
     3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
