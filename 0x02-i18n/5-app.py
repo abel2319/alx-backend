@@ -41,7 +41,7 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-def get_user(id: int) -> Union[Dict, None]:
+def get_user() -> Union[Dict, None]:
     """ function that returns a user dictionary
     or None if the ID cannot be found or if login_as
     was not passed.
@@ -57,7 +57,7 @@ def before_request() -> None:
     """use get_user to find a user if any,
     and set it as a global on flask.g.user
     """
-    user = get_user(request.args.get('login_as', 0))
+    user = get_user()
     g.user = user
 
 
