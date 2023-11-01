@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """0. Basic Flask app
 """
-from flask import Flask, render_template, request
-from flask_babel import Babel, _
+from flask import Flask
+from flask import render_template
+from flask import request
+from flask_babel import Babel
 
 
 app = Flask(__name__)
