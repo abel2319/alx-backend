@@ -16,18 +16,16 @@ class LRUCache(BaseCaching):
     def put(self, key, item):
         """Add an item in the cache
         """
-        if item and key:
-            if len(self.cache_data) == super().MAX_ITEMS and\
-                    key not in self.cache_data.keys():
-                discard = self.keys.pop(0)
-                print(f'DISCARD: {discard}')
-                self.cache_data.pop(discard)
+        if len(self.cache_data) == self.MAX_ITEMS and key not in self.keys:
+            discard = self.keys.pop(0)
+            del self.cache_data[discard]
+            print("DISCARD: {}".format(discard))
 
-            if key in self.cache_data.keys():
+        if key and item:
+            if key in self.cache_data:
                 self.keys.remove(key)
-
-            self.cache_data[key] = item
             self.keys.append(key)
+            self.cache_data[key] = item
 
     def get(self, key):
         """Get an item by key

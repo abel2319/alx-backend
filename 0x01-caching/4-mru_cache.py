@@ -11,7 +11,7 @@ class MRUCache(BaseCaching):
         """initialization
         """
         super().__init__()
-        self.keys = []
+        self.stack = []
 
     def put(self, key, item):
         """Add an item in the cache
