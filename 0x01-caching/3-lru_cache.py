@@ -4,15 +4,14 @@
 BaseCaching = __import__('base_caching').BaseCaching
 
 
-class LIFOCache(BaseCaching):
-    """Class LIFO
+class LRUCache(BaseCaching):
+    """Class LRU
     """
-
-    def __int__(self):
+    def __init__(self):
         """initialization
         """
         super().__init__()
-        self.last_key = ''
+        self.keys = []
 
     def put(self, key, item):
         """Add an item in the cache
@@ -20,11 +19,15 @@ class LIFOCache(BaseCaching):
         if item and key:
             if len(self.cache_data) == super().MAX_ITEMS and\
                     key not in self.cache_data.keys():
-                print(f'DISCARD: {self.last_key}')
-                self.cache_data.pop(self.last_key)
+                discard = self.keys.pop(0)
+                print(f'DISCARD: {discard}')
+                self.cache_data.pop(discard)
+
+            if key in self.cache_data.keys():
+                self.keys.remove(key)
 
             self.cache_data[key] = item
-            self.last_key = key
+            self.keys.append(key)
 
     def get(self, key):
         """Get an item by key
