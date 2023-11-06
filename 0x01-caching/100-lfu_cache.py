@@ -4,29 +4,29 @@
 BaseCaching = __import__('base_caching').BaseCaching
 
 
-class LRUCache(BaseCaching):
-    """Class LRU
+class LFUCache(BaseCaching):
+    """Class LFU
     """
     def __init__(self):
         """initialization
         """
         super().__init__()
-        self.usedKeys = []
+        self.cache_order = []
 
     def put(self, key, item):
         """Add an item in the cache
         """
         if key and item:
             self.cache_data[key] = item
-            if key not in self.usedKeys:
-                self.usedKeys.append(key)
+            if key not in self.cache_order:
+                self.cache_order.append(key)
             else:
-                self.usedKeys.append(
-                    self.usedKeys.pop(self.usedKeys.index(key)))
-            if len(self.usedKeys) > BaseCaching.MAX_ITEMS:
-                discard = self.usedKeys.pop(0)
-                del self.cache_data[discard]
-                print('DISCARD: {:s}'.format(discard))
+                self.cache_order.remove(key)
+                self.cache_order.append(key)
+            if len(self.cache_order) > BaseCaching.MAX_ITEMS:
+                popped = self.cache_order.pop(0)
+                del self.cache_data[popped]
+                print("DISCARD: {}".format(str(popped)))
 
     def get(self, key):
         """Get an item by key
